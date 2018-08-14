@@ -2051,6 +2051,9 @@ void ASConsole::printHelp() const
 	cout << "    --pad-header  OR  -H\n";
 	cout << "    Insert space padding after paren headers (e.g. 'if', 'for'...).\n";
 	cout << endl;
+	cout << "    --pad-function-def\n";
+	cout << "    Insert space between function name and open paren in function definition and declaration.\n";
+	cout << endl;
 	cout << "    --unpad-paren  OR  -U\n";
 	cout << "    Remove unnecessary space padding around parenthesis. This\n";
 	cout << "    can be used in combination with the 'pad' options above.\n";
@@ -3332,6 +3335,10 @@ void ASOptions::parseOption(const string& arg, const string& errorInfo)
 	else if (isOption(arg, "H", "pad-header"))
 	{
 		formatter.setParensHeaderPaddingMode(true);
+	}
+	else if (isOption(arg, "pad-function-def"))
+	{
+		formatter.setPadFunctionDefMode(true);
 	}
 	else if (isOption(arg, "U", "unpad-paren"))
 	{

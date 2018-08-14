@@ -48,6 +48,7 @@ ASFormatter::ASFormatter()
 	shouldPadFirstParen = false;
 	shouldPadParensInside = false;
 	shouldPadHeader = false;
+	shouldPadFunctionDef = true;
 	shouldStripCommentPrefix = false;
 	shouldUnPadParens = false;
 	attachClosingBraceMode = false;
@@ -1839,7 +1840,8 @@ string ASFormatter::nextLine()
 					appendSpacePad();
 			}
 
-			if (shouldPadParensOutside || shouldPadParensInside || shouldUnPadParens || shouldPadFirstParen)
+			if (shouldPadParensOutside || shouldPadParensInside || shouldUnPadParens || shouldPadFirstParen ||
+			    shouldPadFunctionDef)
 				padParens();
 			else
 				appendCurrentChar();
@@ -2161,6 +2163,19 @@ void ASFormatter::setParensFirstPaddingMode(bool state)
 void ASFormatter::setParensHeaderPaddingMode(bool state)
 {
 	shouldPadHeader = state;
+}
+
+/**
+ * set function definition padding mode.
+ * options:
+ *    true     padding will be inserted between function name and open paren
+ *    false    no padding
+ *
+ * @param state         the padding mode.
+ */
+void ASFormatter::setPadFunctionDefMode(bool state)
+{
+	shouldPadFunctionDef = state;
 }
 
 /**
@@ -4565,8 +4580,11 @@ void ASFormatter::padParens()
 					// don't unpad variables
 					else if (isNumericVariable(prevWord))
 						prevIsParenHeader = true;    // don't unpad
+					else if (shouldPadFunctionDef && braceTypeStack->size() == 1)
+						prevIsParenHeader = true;    // don't unpad
 				}
 			}
+
 			// do not unpad operators, but leave them if already padded
 			if (shouldPadParensOutside || prevIsParenHeader)
 				spacesOutsideToDelete--;
@@ -4598,7 +4616,9 @@ void ASFormatter::padParens()
 
 		// pad open paren outside
 		char peekedCharOutside = peekNextChar();
-		if (shouldPadFirstParen && previousChar != '(' && peekedCharOutside != ')')
+		if (previousChar != '(' &&
+		    ((shouldPadFirstParen && peekedCharOutside != ')') ||
+		     (shouldPadFunctionDef && braceTypeStack->size() == 1)))
 			appendSpacePad();
 		else if (shouldPadParensOutside)
 		{

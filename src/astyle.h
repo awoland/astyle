@@ -702,6 +702,7 @@ public:	// functions
 	void setParensFirstPaddingMode(bool state);
 	void setParensInsidePaddingMode(bool state);
 	void setParensHeaderPaddingMode(bool state);
+	void setPadFunctionDefMode(bool state);
 	void setParensUnPaddingMode(bool state);
 	void setPointerAlignment(PointerAlign alignment);
 	void setPreprocBlockIndent(bool state);
@@ -915,6 +916,7 @@ private:  // variables
 	bool shouldPadFirstParen;
 	bool shouldPadParensInside;
 	bool shouldPadHeader;
+	bool shouldPadFunctionDef;
 	bool shouldStripCommentPrefix;
 	bool shouldUnPadParens;
 	bool shouldConvertTabs;

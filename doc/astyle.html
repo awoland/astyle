@@ -150,6 +150,7 @@
         <a class="contents" href="#_pad-first-paren-out">pad&#8209;first&#8209;paren&#8209;out</a>&nbsp;&nbsp;&nbsp;
         <a class="contents" href="#_pad-paren-in">pad&#8209;paren&#8209;in</a>&nbsp;&nbsp;&nbsp;
         <a class="contents" href="#_pad-header">pad&#8209;header</a>&nbsp;&nbsp;&nbsp;
+        <a class="contents" href="#_pad-function-def">pad&#8209;function&#8209;def</a>&nbsp;&nbsp;&nbsp;
         <a class="contents" href="#_unpad-paren">unpad&#8209;paren</a>&nbsp;&nbsp;&nbsp;
         <a class="contents" href="#_delete-empty-lines">delete&#8209;empty&#8209;lines</a>&nbsp;&nbsp;&nbsp;
         <a class="contents" href="#_fill-empty-lines">fill&#8209;empty&#8209;lines</a>&nbsp;&nbsp;&nbsp;
@@ -1696,6 +1697,19 @@ isBar = false;
         <pre>if (isFoo((a+2), b))
     bar(a, b);
 </pre>
+    </div>
+    <p>
+        &nbsp;</p>
+    <p id="_pad-function-def">
+        <code class="title">--pad-function-def</code>
+        <br />
+        Insert space between function name and open paren in function definition and declaration.
+</p>
+    <div class="code">
+      <pre>void foo(int a) {</pre>
+        <p class="code">
+            becomes:</p>
+        <pre>void foo (int a) {</pre>
     </div>
     <p>
         &nbsp;</p>
